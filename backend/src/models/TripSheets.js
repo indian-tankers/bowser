@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const { bowsersDatabaseConnection } = require('../../config/database');
 const bowserDriverSchema = require('./subSchemas/BowserDriver');
-const dispensesSchema = require('./subSchemas/Dispenses');
+// const dispensesSchema = require('./subSchemas/Dispenses');
+const { fuelingTransactionSchema } = require('./Transaction');
 
 const counterSchema = new mongoose.Schema({
     _id: { type: String, required: true },
@@ -17,6 +18,7 @@ const tripSheetSchema = new mongoose.Schema({
         regNo: { type: String, required: true },
         driver: [bowserDriverSchema],
     },
+    hsdRate: { type: Number },
     fuelingAreaDestination: { type: String, required: false },
     proposedDepartureTime: { type: Date, required: false },
     loading: {
@@ -42,7 +44,7 @@ const tripSheetSchema = new mongoose.Schema({
     totalLoadQuantityBySlip: { type: Number },
     totalAdditionQty: { type: Number },
     totalLoadQuantity: { type: Number },
-    dispenses: [dispensesSchema],
+    dispenses: [fuelingTransactionSchema],
     saleQty: { type: Number },
     balanceQty: { type: Number },
     balanceQtyBySlip: { type: Number },

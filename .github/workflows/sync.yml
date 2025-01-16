@@ -7,7 +7,7 @@ on:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04 soon
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3

@@ -170,7 +170,7 @@ router.get('/summary-stats/:userId', async (req, res) => {
                             $match: {
                                 $or: [
                                     { endToLower: { $regex: "maintenece|maintenance" } },
-                                    { "lastStatusUpdate.status": { $in: ["Accident", "Breakdown"] } },
+                                    { "lastStatusUpdate.status": { $in: ["Breakdown"] } },
                                 ],
                                 driverStatus: { $ne: 0 }
                             }
@@ -180,7 +180,7 @@ router.get('/summary-stats/:userId', async (req, res) => {
                     accidental: [
                         {
                             $match: {
-                                "lastStatusUpdate.status": { $in: ["Accident", "Breakdown"] }
+                                "lastStatusUpdate.status": { $in: ["Accident"] }
                             }
                         },
                         { $count: 'count' }
@@ -522,7 +522,7 @@ router.get('/bucket-data/:userId', async (req, res) => {
                 bucketMatch = {
                     $or: [
                         { endToLower: { $regex: "maintenece|maintenance" } },
-                        { "lastStatusUpdate.status": { $in: ["Accident", "Breakdown", "Maintenance"] } },
+                        { "lastStatusUpdate.status": { $in: ["Breakdown", "Maintenance"] } },
                     ],
                     driverStatus: { $ne: 0 }
                 };
@@ -532,7 +532,7 @@ router.get('/bucket-data/:userId', async (req, res) => {
                 bucketMatch = {
                     $or: [
                         { endToLower: { $regex: "maintenece|maintenance" } },
-                        { "lastStatusUpdate.status": { $in: ["Accident", "Breakdown"] } },
+                        { "lastStatusUpdate.status": { $in: ["Breakdown"] } },
                     ],
                     driverStatus: { $ne: 0 }
                 };
@@ -540,7 +540,7 @@ router.get('/bucket-data/:userId', async (req, res) => {
             case 'underMaintenance_accidental':
                 needsStatusFields = true;
                 bucketMatch = {
-                    "lastStatusUpdate.status": { $in: ["Accident", "Breakdown"] }
+                    "lastStatusUpdate.status": { $in: ["Accident"] }
                 };
                 break;
             case 'underMaintenance_no_driver':
